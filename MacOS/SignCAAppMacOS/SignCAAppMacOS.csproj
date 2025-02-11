@@ -48,8 +48,8 @@
 
 
   <ItemGroup>
-    <Compile Update="Views\CertificateSelectionMacOSView.axaml.cs">
-      <DependentUpon>CertificateSelectionMacOSView.axaml</DependentUpon>
+    <Compile Update="AppMacOS.axaml.cs">
+      <DependentUpon>AppMacOS.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

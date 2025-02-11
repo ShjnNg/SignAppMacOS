@@ -5,32 +5,27 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform;
 using Meadow;
 using Meadow.Pinouts;
-using MsBox.Avalonia.Enums;
-using MsBox.Avalonia;
-using SignCAApp.Service;
-using SignCAApp.ViewModels;
-using SignCAApp.Views;
-using Avalonia.Media.Imaging;
+using SignCAAppMacOS.Views;
 using NLog;
 using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 
-namespace SignCAApp;
+namespace SignCAAppMacOS;
 
-public partial class App : AvaloniaMeadowApplication<Linux<RaspberryPi>>
+public partial class AppMacOS : AvaloniaMeadowApplication<Linux<RaspberryPi>>
 {
     private TrayIcon _trayIcon;
     public string _baseUrl;
     public string _token;
     public long _fileId;
     private static Logger _logger = LogManager.GetCurrentClassLogger();
-    public App()
+    public AppMacOS()
     {
     }
-    public App(string baseUrl, string token, string fileId)
+    public AppMacOS(string baseUrl, string token, string fileId)
     {
         _fileId = Convert.ToInt64(fileId);
         _baseUrl = baseUrl;
@@ -54,30 +49,34 @@ public partial class App : AvaloniaMeadowApplication<Linux<RaspberryPi>>
         {
             Resolver.Log.Info($"IMeadowDevice is {r.GetType().Name}");
         }
-
         return Task.CompletedTask;
 
     }
+    //public override bool OpenUrls(NSApplication application, NSUrl[] urls)
+    //{
+    //    foreach (var url in urls)
+    //    {
+    //        if (url.Scheme == "signcaapp-desktop")
+    //        {
+    //            string query = url.AbsoluteString; // signcaapp-desktop:baseurl=aaa
+    //            HandleCustomUrl(query);
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
-    public override void OnFrameworkInitializationCompleted()
+    private void HandleCustomUrl(string url)
     {
         try
         {
             _trayIcon = new TrayIcon
             {
                 Icon = new WindowIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "favicon.ico")),
-                ToolTipText = "SignCAApp",
+                ToolTipText = "SignCAAppMacOS",
                 IsVisible = true
             };
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow = new MainWindow(_baseUrl, _token, _fileId)
-                {
-                    DataContext = new MainWindowViewModel(_baseUrl, _token, _fileId)
-                };
-                desktop.MainWindow.Hide();
-            }
-            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
                 singleViewPlatform.MainView = new CertificateSelectionMacOSView
                 {
@@ -88,19 +87,48 @@ public partial class App : AvaloniaMeadowApplication<Linux<RaspberryPi>>
             // Xử lý khi click vào icon system tray
             _trayIcon.Clicked += (_, _) =>
             {
-                if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
                 {
-                    if (desktop.MainWindow.IsVisible)
+                    if (singleViewPlatform.MainView.IsVisible)
                     {
-                        desktop.MainWindow.Hide();
+                        singleViewPlatform.MainView.IsVisible = false;
                     }
                     else
                     {
-                        desktop.MainWindow.Show();
-                        desktop.MainWindow.Activate();
+                        singleViewPlatform.MainView.IsVisible = true;
                     }
                 }
-                else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.Error($"Lỗi: [{ex}]");
+            throw;
+        }
+        base.OnFrameworkInitializationCompleted();
+    }
+    public override void OnFrameworkInitializationCompleted()
+    {
+        try
+        {
+            _trayIcon = new TrayIcon
+            {
+                Icon = new WindowIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "favicon.ico")),
+                ToolTipText = "SignCAAppMacOS",
+                IsVisible = true
+            };
+           if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                singleViewPlatform.MainView = new CertificateSelectionMacOSView
+                {
+                    DataContext = new CertificateSelectionMacOSView(_baseUrl, _token, _fileId)
+                };
+                singleViewPlatform.MainView.IsVisible = true;
+            }
+            // Xử lý khi click vào icon system tray
+            _trayIcon.Clicked += (_, _) =>
+            {
+                if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
                 {
                     if (singleViewPlatform.MainView.IsVisible)
                     {

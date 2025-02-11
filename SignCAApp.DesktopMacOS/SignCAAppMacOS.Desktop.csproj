@@ -4,7 +4,7 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <TargetFrameworks>net8.0-macos</TargetFrameworks>
-    <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>osx-x64<!--;osx-arm64--></RuntimeIdentifiers>
     <UseMacCatalyst>true</UseMacCatalyst>
     <PublishSingleFiles>true</PublishSingleFiles>
   </PropertyGroup>
@@ -35,6 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SignCAApp\SignCAApp.csproj" />
+    <ProjectReference Include="..\..\SignCAApp\MacOS\SignCAAppMacOS\SignCAAppMacOS.csproj" />
   </ItemGroup>
 </Project>

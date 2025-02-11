@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "SignCAApp.Desktop": {
-      "commandName": "Project",
-      "commandLineArgs": "signcaapp-desktop:baseURL=https://api-hoiana.dn.greenglobal.vn/sign-file;token=eyJ4NXQiOiJOVEF4Wm1Ne;fileid=103"
-    }
-  }
-}

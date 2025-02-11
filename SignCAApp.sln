@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignCAApp", "SignCAApp\SignCAApp.csproj", "{5DD83DA0-D1A5-48A5-B351-E30B422B5C0D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MacOS", "MacOS", "{0BE22C60-1ABF-44E3-8C28-1F55DB995520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignCAApp.Desktop", "SignCAApp.Desktop\SignCAApp.Desktop.csproj", "{B32648A0-4FBF-4C8E-9687-A302E51A1956}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignCAAppMacOS.Desktop", "SignCAApp.DesktopMacOS\SignCAAppMacOS.Desktop.csproj", "{AD0996EA-89E8-4CAD-8C0E-7B3CFBF7BBD5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SignCAHoiAnaApp", "SingCAAWindow\SingCAAWindow.vdproj", "{4160665E-7013-4FC5-ABDA-16263A1F0042}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignCAApp.DesktopMacOS", "SignCAApp.DesktopMacOS\SignCAApp.DesktopMacOS.csproj", "{49C38160-A162-486A-B62D-1AE13BFD2680}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SignCAHoianaMacOS", "SignCAHoiana\SignCAHoiana.vdproj", "{49956514-BC37-4BEA-8B05-AE35FA87C4DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignCAAppMacOS", "MacOS\SignCAAppMacOS\SignCAAppMacOS.csproj", "{482D0B77-04A0-49FA-ADEC-081782931E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,24 +15,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DD83DA0-D1A5-48A5-B351-E30B422B5C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DD83DA0-D1A5-48A5-B351-E30B422B5C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DD83DA0-D1A5-48A5-B351-E30B422B5C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DD83DA0-D1A5-48A5-B351-E30B422B5C0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B32648A0-4FBF-4C8E-9687-A302E51A1956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B32648A0-4FBF-4C8E-9687-A302E51A1956}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B32648A0-4FBF-4C8E-9687-A302E51A1956}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B32648A0-4FBF-4C8E-9687-A302E51A1956}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4160665E-7013-4FC5-ABDA-16263A1F0042}.Debug|Any CPU.ActiveCfg = Debug
-		{4160665E-7013-4FC5-ABDA-16263A1F0042}.Release|Any CPU.ActiveCfg = Release
-		{49C38160-A162-486A-B62D-1AE13BFD2680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49C38160-A162-486A-B62D-1AE13BFD2680}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49C38160-A162-486A-B62D-1AE13BFD2680}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49C38160-A162-486A-B62D-1AE13BFD2680}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49956514-BC37-4BEA-8B05-AE35FA87C4DA}.Debug|Any CPU.ActiveCfg = Debug
-		{49956514-BC37-4BEA-8B05-AE35FA87C4DA}.Release|Any CPU.ActiveCfg = Release
+		{AD0996EA-89E8-4CAD-8C0E-7B3CFBF7BBD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0996EA-89E8-4CAD-8C0E-7B3CFBF7BBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0996EA-89E8-4CAD-8C0E-7B3CFBF7BBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0996EA-89E8-4CAD-8C0E-7B3CFBF7BBD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482D0B77-04A0-49FA-ADEC-081782931E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482D0B77-04A0-49FA-ADEC-081782931E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482D0B77-04A0-49FA-ADEC-081782931E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482D0B77-04A0-49FA-ADEC-081782931E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD0996EA-89E8-4CAD-8C0E-7B3CFBF7BBD5} = {0BE22C60-1ABF-44E3-8C28-1F55DB995520}
+		{482D0B77-04A0-49FA-ADEC-081782931E3D} = {0BE22C60-1ABF-44E3-8C28-1F55DB995520}
 	EndGlobalSection
 EndGlobal

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
 using Avalonia;
 using Avalonia.ReactiveUI;
 using NLog;
@@ -21,39 +20,49 @@ class Program
     [STAThread]
     public static int Main(string[] args)
     {
-        var builder = BuildAvaloniaApp();
-
-        _logger.Info("Start program argrs.length=" + args.Length);
-        if (args.Length > 0)
+        try
         {
-            _logger.Info("Tham số truyền vào chương trình:");
-            for (int i = 0; i < args.Length; i++)
-                _logger.Info($"\t{i}\t{args[i]}");
-        }
+            var builder = BuildAvaloniaApp();
 
-        if (args.Contains("--drm"))
-        {
-            SilenceConsole();
-            // If Card0, Card1 and Card2 all don't work. You can also try:                 
-            // return builder.StartLinuxFbDev(args);
-            // return builder.StartLinuxDrm(args, "/dev/dri/card1");
-            return builder.StartLinuxDrm(args, "/dev/dri/card1", 1D);
-        }
-        var arrayArgs = ReadDataInput(args[0]).ToArray();
+            _logger.Info("Start program argrs.length=" + args.Length);
+            if (args.Length > 0)
+            {
+                _logger.Info("Tham số truyền vào chương trình:");
+                for (int i = 0; i < args.Length; i++)
+                    _logger.Info($"\t{i}\t{args[i]}");
+            }
 
-        if (arrayArgs != null && arrayArgs.Any())
-        {
-            if (arrayArgs.Count() >= 0) _baseURL = arrayArgs[0];
-            if (arrayArgs.Count() >= 1) _token = arrayArgs[1];
-            if (arrayArgs.Count() >= 2) _fileId = arrayArgs[2];
+            if (args.Contains("--drm"))
+            {
+                SilenceConsole();
+                // If Card0, Card1 and Card2 all don't work. You can also try:                 
+                // return builder.StartLinuxFbDev(args);
+                // return builder.StartLinuxDrm(args, "/dev/dri/card1");
+                return builder.StartLinuxDrm(args, "/dev/dri/card1", 1D);
+            }
+            var arrayArgs = ReadDataInput(args[0]).ToArray();
+
+            if (arrayArgs != null && arrayArgs.Any())
+            {
+                if (arrayArgs.Count() >= 0) _baseURL = arrayArgs[0];
+                if (arrayArgs.Count() >= 1) _token = arrayArgs[1];
+                if (arrayArgs.Count() >= 2) _fileId = arrayArgs[2];
+            }
+            return builder.StartWithClassicDesktopLifetime(args);
         }
-         return builder.StartWithClassicDesktopLifetime(args);
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+            return 0;
+            // Bạn có thể ghi lại lỗi vào một tệp hoặc hệ thống giám sát
+        }
+       
     }
 
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure(() => new App(_baseURL, _token, _fileId))
+        => AppBuilder.Configure(() => new SignCAAppMacOS.AppMacOS(_baseURL, _token, _fileId))
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace()

@@ -49,37 +49,6 @@ public class CertificateSelectionMacOSViewModel : ViewModelBase
         Message = kySoService.SendCertToFile(FileId, SelectedCertificate).GetAwaiter().GetResult();
         Task.Delay(5000).ContinueWith(t => Environment.Exit(0));
     }
-
-    public X509Certificate2 GetCertificateWindows()
-    {
-        //Chung thu so nguoi ky
-        X509Certificate2 cert = null;
-
-        // Select a certificate to signature
-        X509Certificate2Collection keyStore = new X509Certificate2Collection();
-        X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-        //X509Store store = new X509Store(StoreName.My, StoreLocation.LocalMachine); // sửa theo hướng dẫn của Huy
-        store.Open(OpenFlags.ReadOnly);
-        keyStore.AddRange(store.Certificates);
-        store.Close();
-
-        try
-        {
-            var lst = X509Certificate2UI.SelectFromCollection(keyStore, "Chứng thư số ký", "Chọn chứng thư số ký", X509SelectionFlag.SingleSelection);
-            if (lst.Count > 0)
-            {
-                cert = lst[0];
-                return cert;
-            }
-            else
-                return null;
-        }
-        catch (Exception ex)
-        {
-            _logger.Error("ERROR GetCertificate:" + ex);
-            throw ex;
-        }
-    }
     private void LoadCertificates()
     {
         try
