@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SignCAApp.Desktop": {
+      "commandName": "Project",
+      "commandLineArgs": "signcaapp-desktop:baseURL=abcd;token=eyJ4NXQiOiJOVEF4Wm1Ne;fileid=103"
+    }
+  }
+}

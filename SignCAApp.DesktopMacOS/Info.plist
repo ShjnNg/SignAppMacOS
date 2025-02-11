@@ -1,0 +1,11 @@
+﻿<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLName</key>
+        <string>greenglobal.signcaapp</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>signcaapp-desktop</string>
+        </array>
+    </dict>
+</array>
